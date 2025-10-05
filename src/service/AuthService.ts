@@ -18,16 +18,6 @@ axios.interceptors.request.use(
 );
 
 // Handle auth errors
-axios.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    if (error.response?.status === 401) {
-      localStorage.removeItem("token");
-      window.location.href = "/login";
-    }
-    return Promise.reject(error);
-  }
-);
 
 export const loginApi = async (login: LoginDto): Promise<string> => {
   const response = await axios.post(`${AUTH_BACKEND_URL}/login`, login, {
@@ -54,26 +44,4 @@ export function isLoggedIn(): boolean {
   return !!getToken();
 }
 
-axios.interceptors.request.use(
-  (config) => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      config.headers.Authorization = `Basic ${token}`;
-    }
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
-);
-
-axios.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    if (error.response?.status === 401) {
-      localStorage.removeItem("token");
-      window.location.href = "/login";
-    }
-    return Promise.reject(error);
-  }
-);
+// (Duplicate interceptors removed)
