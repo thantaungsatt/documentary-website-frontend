@@ -8,6 +8,7 @@ import CreatePost from "./components/CreatePost";
 import PostPage from "./components/PostPage";
 import PostByCategoryPage from "./components/PostByCategoryPage";
 import PostDetails from "./components/PostDetails";
+import { ToastContainer } from "react-toastify";
 
 // Debug component to track routing
 function RouteDebugger() {
@@ -31,14 +32,16 @@ export default function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/manage-category" element={<CategoryPage />} />
           <Route path="/create-post" element={<CreatePost />} />
+          <Route path="/posts/edit/:id" element={<CreatePost />} />
           <Route path="/posts" element={<PostPage />} />
           <Route
             path="/categories-posts/:categoryName"
             element={<PostByCategoryPage />}
           />
-          <Route path="/posts/:name" element={<PostDetails />} />
+          <Route path="/posts/:id" element={<PostDetails />} />
         </Routes>
       </BrowserRouter>
+      <ToastContainer position="top-right" autoClose={3000} />
     </div>
   );
 }

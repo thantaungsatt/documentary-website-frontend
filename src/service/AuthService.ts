@@ -1,5 +1,6 @@
 import axios from "axios";
 import type { LoginDto } from "../dto/LoginDto";
+import type { LoginResponse } from "../dto/LoginResponse";
 
 const AUTH_BACKEND_URL = "http://localhost:8080/auth";
 
@@ -18,13 +19,28 @@ axios.interceptors.request.use(
 );
 
 // Handle auth errors
+axios.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401) {
+      localStorage.removeItem("token");
+      window.location.href = "/login";
+    }
+    return Promise.reject(error);
+  }
+);
 
-export const loginApi = async (login: LoginDto): Promise<string> => {
-  const response = await axios.post(`${AUTH_BACKEND_URL}/login`, login, {
-    headers: {
-      Authorization: `Basic ${btoa(`${login.username}:${login.password}`)}`,
-    },
-  });
+export const loginApi = async (login: LoginDto): Promise<LoginResponse> => {
+  const response = await axios.post<LoginResponse>(
+    `${AUTH_BACKEND_URL}/login`,
+    login,
+    {
+      headers: {
+        Authorization: `Basic ${btoa(`${login.username}:${login.password}`)}`,
+      },
+    }
+  );
+
   return response.data;
 };
 
@@ -43,5 +59,3 @@ export const getToken = () => {
 export function isLoggedIn(): boolean {
   return !!getToken();
 }
-
-// (Duplicate interceptors removed)

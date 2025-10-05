@@ -10,19 +10,6 @@ export const getCategoriesApi = async (): Promise<CategoryDto[]> => {
   return response.data;
 };
 
-// const token = localStorage.getItem("token");
-
-// export const createCategoriesApi = async (categoryDto) => {
-//   const response = await axios.post(
-//     `${BACKEND_URL}/create-category`,
-//     categoryDto,
-//     {
-//       headers: { Authorization: `Bearer ${token}` },
-//     }
-//   );
-//   return response.data;
-// };
-
 export const createCategoriesApi = async (categoryDto: {
   categoryName: string;
   description: string;
@@ -45,8 +32,53 @@ export const updateCategoryApi = async (
   return response.data;
 };
 
-export const createPostApi = async (postFormData: FormData) => {
-  const response = await axios.post(`${BACKEND_URL}/create-post`, postFormData);
+export const getPostByIdApi = async (id: number) => {
+  const response = await axios.get(`${BACKEND_URL}/list/posts/${id}`);
+  return response.data; // response.data.imageBase64 is now a string
+};
+
+export const createPostApi = async (
+  postFormData: FormData
+): Promise<string> => {
+  const token = localStorage.getItem("token"); // or your auth token storage
+
+  const response = await axios.post(
+    `${BACKEND_URL}/create-post`,
+    postFormData,
+    {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${token}`, // Add if using JWT
+      },
+    }
+  );
+  return response.data;
+};
+
+export const updatePostApi = async (
+  id: number,
+  data: FormData
+): Promise<string> => {
+  const token = localStorage.getItem("token");
+
+  const response = await axios.put(`${BACKEND_URL}/update-post/${id}`, data, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${token}`, // Add if using JWT
+    },
+  });
+  return response.data;
+};
+
+export const deletePostApi = async (id: number) => {
+  const token = localStorage.getItem("token");
+  if (!token) throw new Error("Not authenticated");
+
+  const response = await axios.delete(`${BACKEND_URL}/posts/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
   return response.data;
 };
 
@@ -64,5 +96,10 @@ export const getPostByCategoryApi = async (categoryName: string) => {
 
 export const getRecentPostApi = async () => {
   const response = await axios.get(`${BACKEND_URL}/list/recent-posts`);
+  return response.data;
+};
+
+export const getFeaturedPostApi = async () => {
+  const response = await axios.get(`${BACKEND_URL}/list/featured-posts`);
   return response.data;
 };

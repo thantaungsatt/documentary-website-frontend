@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { loginApi, setToken, isLoggedIn } from "../service/AuthService";
+import { loginApi, setToken } from "../service/AuthService";
+import { toast } from "react-toastify";
 
 export default function Login() {
   const [username, setUsername] = useState<string>("");
@@ -15,22 +16,18 @@ export default function Login() {
     setError("");
 
     try {
-      const token = btoa(`${username}:${password}`);
-      setToken(token);
-
-      console.log("Attempting login with token:", token);
       const response = await loginApi({ username, password });
-      console.log("Login response:", response);
+      toast.success(response.message);
+      setToken(btoa(`${username}:${password}`)); // save encoded Basic token
 
-      console.log("Token after login:", localStorage.getItem("token"));
-      console.log("isLoggedIn after login:", isLoggedIn());
-
-      window.dispatchEvent(new Event("storage"));
-      navigate("/");
+      // Redirect to home page after short delay
+      setTimeout(() => {
+        navigate("/");
+      }, 800);
     } catch (err: any) {
-      console.error("Login error:", err);
-      setError(err.response?.data || "Invalid username or password");
-      localStorage.removeItem("token");
+      console.error(err);
+      setError("Invalid username or password");
+      toast.error("Invalid credentials");
     } finally {
       setLoading(false);
     }
@@ -192,7 +189,7 @@ export default function Login() {
               ) : (
                 <>
                   <span>Sign In</span>
-                  <svg
+                  {/* <svg
                     className="w-5 h-5"
                     fill="none"
                     stroke="currentColor"
@@ -204,7 +201,7 @@ export default function Login() {
                       strokeWidth={2}
                       d="M13 7l5 5m0 0l-5 5m5-5H6"
                     />
-                  </svg>
+                  </svg> */}
                 </>
               )}
             </button>

@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import type { PostDto } from "../dto/PostDto";
-import { getRecentPostApi } from "../service/TaungooService";
+import { getFeaturedPostApi } from "../service/TaungooService";
 
 export default function Home() {
-  const [recentPosts, setRecentPosts] = useState<PostDto[]>([]);
+  const [featuredPosts, setFeaturedPosts] = useState<PostDto[]>([]);
 
   useEffect(() => {
-    getRecentPostApi()
-      .then((res) => setRecentPosts(res))
+    getFeaturedPostApi()
+      .then((res) => setFeaturedPosts(res))
       .catch((err) => console.error(err));
   }, []);
 
@@ -41,21 +41,21 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Recent Posts Section */}
+      {/* Featured Posts Section */}
       <section className="px-6 py-10 bg-white/90 backdrop-blur-md">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-              ✨ Recent Posts
+              🌟 Featured Posts
             </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto rounded-full"></div>
             <p className="text-gray-600 text-lg mt-4 max-w-2xl mx-auto">
-              Discover the latest stories and insights about Taungoo
+              Explore our highlighted stories and special features about Taungoo
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-            {recentPosts.map((post) => (
+            {featuredPosts.map((post) => (
               <article
                 key={post.postId}
                 className="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 overflow-hidden border border-gray-100 hover:border-transparent hover:ring-2 hover:ring-blue-400/50"
