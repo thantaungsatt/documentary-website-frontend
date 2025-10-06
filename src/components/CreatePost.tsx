@@ -25,7 +25,7 @@ export default function CreatePost() {
     { id: number; categoryName: string }[]
   >([]);
 
-  // 🔹 Load username and token
+  //  Load username and token
   useEffect(() => {
     const savedUsername = localStorage.getItem("username");
     const token = localStorage.getItem("token");
@@ -40,7 +40,7 @@ export default function CreatePost() {
     }
   }, [navigate]);
 
-  // 🔹 Fetch categories
+  //  Fetch categories
   useEffect(() => {
     getCategoriesApi()
       .then((res) => setCategories(res))
@@ -50,7 +50,7 @@ export default function CreatePost() {
       });
   }, []);
 
-  // 🔹 If editing, load post details
+  //  If editing, load post details
   useEffect(() => {
     if (id) {
       getPostByIdApi(Number(id))
@@ -70,7 +70,7 @@ export default function CreatePost() {
     }
   }, [id]);
 
-  // 🔹 Handle image preview
+  //  Handle image preview
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
@@ -84,7 +84,7 @@ export default function CreatePost() {
     }
   };
 
-  // 🔹 Handle create or update
+  //  Handle create or update
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -135,18 +135,7 @@ export default function CreatePost() {
       }, 1000);
     } catch (err: any) {
       console.error("Submit error:", err);
-
-      // More detailed error handling
-      if (err.response) {
-        // Server responded with error status
-        toast.error(err.response.data || `Error: ${err.response.status}`);
-      } else if (err.request) {
-        // Request was made but no response received
-        toast.error("Network error - please check your connection");
-      } else {
-        // Other errors
-        toast.error("An unexpected error occurred");
-      }
+      toast.error("Failed to submit post");
     } finally {
       setLoading(false);
     }
@@ -155,7 +144,7 @@ export default function CreatePost() {
   return (
     <div className="pt-16 min-h-screen bg-gray-50 flex justify-center">
       <div className="w-full max-w-2xl bg-white rounded-2xl shadow-md p-6 mt-6">
-        <h1 className="text-xl font-semibold mb-4">
+        <h1 className="text-xl font-semibold mb-4 text-center">
           {id ? "Edit Post" : "Create Post"}
         </h1>
 
@@ -243,7 +232,7 @@ export default function CreatePost() {
           <button
             type="submit"
             disabled={loading}
-            className={`w-full py-3 rounded-xl text-white font-medium ${
+            className={`w-full items-center space-x-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-2 rounded-xl font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300 ${
               loading
                 ? "bg-sky-400 cursor-not-allowed"
                 : "bg-sky-600 hover:bg-sky-700"
@@ -254,8 +243,8 @@ export default function CreatePost() {
                 ? "Updating..."
                 : "Posting..."
               : id
-              ? "Update Post"
-              : "Create Post"}
+              ? "Post"
+              : "Post"}
           </button>
         </form>
       </div>

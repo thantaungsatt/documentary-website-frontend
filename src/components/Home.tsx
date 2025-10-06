@@ -1,14 +1,26 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import type { PostDto } from "../dto/PostDto";
 import { getFeaturedPostApi } from "../service/TaungooService";
+import { MdFeaturedPlayList } from "react-icons/md";
 
 export default function Home() {
   const [featuredPosts, setFeaturedPosts] = useState<PostDto[]>([]);
 
   useEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: true,
+      offset: 100,
+    });
+
     getFeaturedPostApi()
-      .then((res) => setFeaturedPosts(res))
+      .then((res) => {
+        setFeaturedPosts(res);
+        AOS.refresh();
+      })
       .catch((err) => console.error(err));
   }, []);
 
@@ -23,18 +35,28 @@ export default function Home() {
         <div className="absolute bottom-10 left-1/2 w-28 h-28 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
 
         <div className="relative z-10 text-center max-w-5xl">
-          <h1 className="text-6xl md:text-7xl font-extrabold text-gray-900 mb-6 leading-tight tracking-tight">
+          <h1
+            className="text-6xl md:text-7xl font-extrabold text-gray-900 mb-6 leading-tight tracking-tight"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
             Welcome to{" "}
             <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent drop-shadow">
               Taungoo
             </span>
           </h1>
-          <p className="text-xl md:text-2xl text-gray-700 mb-10 leading-relaxed max-w-2xl mx-auto">
+          <p
+            className="text-xl md:text-2xl text-gray-700 mb-10 leading-relaxed max-w-2xl mx-auto"
+            data-aos="fade-up"
+            data-aos-delay="300"
+          >
             "Taungoo: A Kingdom Remembered."
           </p>
           <Link
             to="/posts"
             className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 hover:from-blue-600 hover:to-purple-700"
+            data-aos="zoom-in"
+            data-aos-delay="500"
           >
             Get Started
           </Link>
@@ -42,44 +64,58 @@ export default function Home() {
       </section>
 
       {/* Featured Posts Section */}
-      <section className="px-6 py-10 bg-white/90 backdrop-blur-md">
+      <section className="px-6 py-16 bg-gradient-to-br from-white/90 to-blue-50 backdrop-blur-md">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-              🌟 Featured Posts
+          {/* Header */}
+          <div className="text-center mb-20">
+            <h2
+              className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4 tracking-tight"
+              data-aos="fade-up"
+            >
+              Featured Posts
             </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto rounded-full"></div>
-            <p className="text-gray-600 text-lg mt-4 max-w-2xl mx-auto">
-              Explore our highlighted stories and special features about Taungoo
+            <div
+              className="w-28 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto rounded-full shadow-md"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            ></div>
+            <p
+              className="text-gray-700 text-lg mt-4 max-w-2xl mx-auto leading-relaxed"
+              data-aos="fade-up"
+              data-aos-delay="400"
+            >
+              Dive into our curated stories and special highlights from Taungoo
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-            {featuredPosts.map((post) => (
+          {/* Posts Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+            {featuredPosts.map((post, index) => (
               <article
                 key={post.postId}
-                className="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 overflow-hidden border border-gray-100 hover:border-transparent hover:ring-2 hover:ring-blue-400/50"
+                data-aos="fade-up"
+                data-aos-delay={100 + index * 100}
+                className="group relative bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 overflow-hidden border border-gray-100 hover:border-transparent hover:ring-2 hover:ring-blue-400/50"
               >
                 {/* Image */}
-                <div className="relative h-52 overflow-hidden">
+                <div className="relative h-56 overflow-hidden">
                   {post.imageBase64 ? (
                     <img
                       src={`data:image/jpeg;base64,${post.imageBase64}`}
                       alt={post.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out"
                     />
                   ) : (
                     <div className="w-full h-full bg-gradient-to-br from-blue-400 via-purple-500 to-pink-500 flex items-center justify-center">
-                      <span className="text-white font-bold text-xl tracking-wider">
+                      <span className="text-white font-bold text-2xl tracking-wider">
                         Taungoo
                       </span>
                     </div>
                   )}
                   <div className="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition duration-300"></div>
-
                   {post.featured && (
                     <div className="absolute top-4 right-4">
-                      <span className="bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">
+                      <span className="bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md animate-pulse">
                         Featured
                       </span>
                     </div>
@@ -88,7 +124,7 @@ export default function Home() {
 
                 {/* Content */}
                 <div className="p-6">
-                  <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center justify-between mb-4">
                     <span className="bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-1 rounded-full">
                       {post.category}
                     </span>
@@ -101,7 +137,7 @@ export default function Home() {
                     </span>
                   </div>
 
-                  <h3 className="font-bold text-gray-900 text-lg mb-3 line-clamp-2 group-hover:text-blue-600 transition-colors duration-300">
+                  <h3 className="font-bold text-gray-900 text-xl mb-3 line-clamp-2 group-hover:text-blue-600 transition-colors duration-300">
                     {post.title}
                   </h3>
 
@@ -111,16 +147,16 @@ export default function Home() {
 
                   <div className="flex items-center justify-between pt-4 border-t border-gray-100">
                     <div className="flex items-center">
-                      <div className="w-9 h-9 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full flex items-center justify-center text-white text-sm font-bold">
+                      <div className="w-10 h-10 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full flex items-center justify-center text-white text-sm font-bold shadow-md">
                         {post.username?.charAt(0) || "U"}
                       </div>
-                      <span className="text-sm text-gray-700 ml-2 font-medium">
+                      <span className="text-sm text-gray-700 ml-3 font-medium">
                         {post.username}
                       </span>
                     </div>
                     <Link
                       to={`/posts/${post.postId}`}
-                      className="inline-flex items-center text-blue-600 hover:text-blue-700 font-semibold text-sm transition-colors duration-300"
+                      className="inline-flex items-center text-blue-600 hover:text-purple-600 font-semibold text-sm transition-colors duration-300"
                     >
                       Read More
                       <svg
@@ -149,9 +185,6 @@ export default function Home() {
       <footer className="bg-gradient-to-r from-gray-900 to-black text-white py-12 mt-16">
         <div className="max-w-7xl mx-auto px-6 text-center">
           <div className="flex items-center justify-center mb-6">
-            <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center mr-3 shadow-md">
-              <span className="text-white font-bold text-lg">T</span>
-            </div>
             <span className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
               Taungoo
             </span>
@@ -162,7 +195,7 @@ export default function Home() {
           </p>
           <div className="flex justify-center space-x-6 mb-6">
             <a
-              href="#"
+              href=""
               className="text-gray-400 hover:text-white transition-colors duration-300"
             >
               <span className="sr-only">Facebook</span>
@@ -171,7 +204,7 @@ export default function Home() {
               </svg>
             </a>
             <a
-              href="#"
+              href=""
               className="text-gray-400 hover:text-white transition-colors duration-300"
             >
               <span className="sr-only">Twitter</span>
@@ -185,7 +218,6 @@ export default function Home() {
           </p>
         </div>
       </footer>
-
       {/* Animations */}
       <style jsx>{`
         @keyframes blob {

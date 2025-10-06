@@ -5,6 +5,15 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { getPostByIdApi, deletePostApi } from "../service/TaungooService";
 import type { PostDto } from "../dto/PostDto";
 import { toast } from "react-toastify";
+import {
+  CgMore,
+  CgMoreAlt,
+  CgMoreVerticalAlt,
+  CgMoreVerticalO,
+  CgMoreVerticalR,
+} from "react-icons/cg";
+import { PiPencil } from "react-icons/pi";
+import { BiTrash } from "react-icons/bi";
 
 export default function PostDetails() {
   const { id } = useParams();
@@ -65,24 +74,25 @@ export default function PostDetails() {
         {loggedIn && (
           <div className="absolute top-4 right-4">
             <button
-              className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300"
+              className="px-2 py-1 rounded-full hover:bg-gray-200"
               onClick={() => setShowOptions(!showOptions)}
             >
-              ⋮ More
+              <CgMoreVerticalAlt size={24} />
             </button>
             {showOptions && (
-              <div className="absolute right-0 mt-2 w-32 bg-white border rounded shadow-lg z-10">
+              <div className="absolute right-0 mt-2 w-36 bg-white border rounded-2xl shadow-lg z-10">
                 <button
                   onClick={() => navigate(`/posts/edit/${post.postId}`)}
-                  className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                  className="block w-full text-left px-4 py-2 hover:bg-gray-100 rounded-t-2xl"
                 >
-                  Edit
+                  <PiPencil size={20} className="inline-block mr-1" /> Edit Post
                 </button>
                 <button
                   onClick={handleDelete}
-                  className="block w-full text-left px-4 py-2 text-red-600 hover:bg-gray-100"
+                  className="block w-full text-left px-4 py-2 text-red-600 hover:bg-gray-100 rounded-b-2xl"
                 >
-                  Delete
+                  <BiTrash size={20} className="inline-block mr-1" /> Delete
+                  Post
                 </button>
               </div>
             )}
@@ -113,7 +123,7 @@ export default function PostDetails() {
           <img
             src={`data:image/jpeg;base64,${post.imageBase64}`}
             alt={post.title}
-            className="w-full h-80 object-cover rounded-lg mb-6"
+            className="w-full h-screen object-cover rounded-lg mb-6"
           />
         )}
 

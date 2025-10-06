@@ -115,9 +115,6 @@ export default function Navbar() {
             to="/"
             className="flex items-center space-x-3 group flex-shrink-0"
           >
-            <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow duration-300">
-              <span className="text-white font-bold text-lg">T</span>
-            </div>
             <span className="text-2xl font-black bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
               Taungoo
             </span>
@@ -235,12 +232,12 @@ export default function Navbar() {
                     <div className="w-8 h-8 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full flex items-center justify-center text-white text-sm font-bold shadow-lg">
                       <FaUser size={12} />
                     </div>
-                    <FaChevronDown
+                    {/* <FaChevronDown
                       size={12}
                       className={`text-gray-600 transition-transform duration-300 ${
                         isUserDropdownOpen ? "rotate-180" : ""
                       }`}
-                    />
+                    /> */}
                   </button>
 
                   {/* User Dropdown Menu */}
@@ -264,13 +261,13 @@ export default function Navbar() {
                           <span>Profile</span>
                         </button>
 
-                        <button
+                        {/* <button
                           onClick={() => handleDropdownItemClick("post")}
                           className="w-full flex items-center space-x-3 px-4 py-3 text-sm text-gray-700 hover:text-blue-600 hover:bg-blue-50/50 transition-colors duration-300 sm:hidden"
                         >
                           <FaPlus size={14} className="text-gray-400" />
                           <span>Create Post</span>
-                        </button>
+                        </button> */}
 
                         <button
                           onClick={() => handleDropdownItemClick("category")}

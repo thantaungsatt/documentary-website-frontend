@@ -60,11 +60,11 @@ export default function PostPage() {
             <div className="text-lg text-gray-600">No posts found</div>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 items-stretch">
             {posts.map((post) => (
               <article
                 key={post.postId}
-                className="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 overflow-hidden border border-gray-100 hover:border-transparent hover:ring-2 hover:ring-blue-400/50"
+                className="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 overflow-hidden border border-gray-100 hover:border-transparent hover:ring-2 hover:ring-blue-400/50 flex flex-col h-full"
               >
                 {/* Image */}
                 <div className="relative h-52 overflow-hidden">
@@ -85,7 +85,7 @@ export default function PostPage() {
                 </div>
 
                 {/* Content */}
-                <div className="p-6">
+                <div className="p-6 flex flex-col flex-grow">
                   <div className="flex items-center justify-between mb-3">
                     <span className="bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-1 rounded-full">
                       {post.category || "Uncategorized"}
@@ -107,7 +107,7 @@ export default function PostPage() {
                     {post.content}
                   </p>
 
-                  <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+                  <div className="mt-auto flex items-center justify-between pt-4 border-t border-gray-100">
                     <div className="flex items-center">
                       <div className="w-9 h-9 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full flex items-center justify-center text-white text-sm font-bold">
                         {post.username?.charAt(0)?.toUpperCase() || "U"}
