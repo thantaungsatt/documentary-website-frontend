@@ -4,7 +4,6 @@ import type { LoginResponse } from "../dto/LoginResponse";
 
 const AUTH_BACKEND_URL = "http://localhost:8080/auth";
 
-// Axios interceptor to add auth header to all requests
 axios.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("token");
@@ -18,7 +17,6 @@ axios.interceptors.request.use(
   }
 );
 
-// Handle auth errors
 axios.interceptors.response.use(
   (response) => response,
   (error) => {

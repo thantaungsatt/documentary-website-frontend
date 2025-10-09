@@ -26,9 +26,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-indigo-100">
-      {/* Hero Section */}
       <section className="relative flex items-center justify-center min-h-[70vh] px-6 py-20">
-        {/* Background blobs */}
         <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10"></div>
         <div className="absolute top-10 left-10 w-28 h-28 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
         <div className="absolute top-20 right-16 w-28 h-28 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
@@ -63,10 +61,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Featured Posts Section */}
       <section className="px-6 py-16 bg-gradient-to-br from-white/90 to-blue-50 backdrop-blur-md">
         <div className="max-w-7xl mx-auto">
-          {/* Header */}
           <div className="text-center mb-20">
             <h2
               className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4 tracking-tight"
@@ -88,7 +84,6 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Posts Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
             {featuredPosts.map((post, index) => (
               <article
@@ -97,7 +92,6 @@ export default function Home() {
                 data-aos-delay={100 + index * 100}
                 className="group relative bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 overflow-hidden border border-gray-100 hover:border-transparent hover:ring-2 hover:ring-blue-400/50"
               >
-                {/* Image */}
                 <div className="relative h-56 overflow-hidden">
                   {post.imageBase64 ? (
                     <img
@@ -122,7 +116,6 @@ export default function Home() {
                   )}
                 </div>
 
-                {/* Content */}
                 <div className="p-6">
                   <div className="flex items-center justify-between mb-4">
                     <span className="bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-1 rounded-full">
@@ -181,7 +174,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Footer */}
       <footer className="bg-gradient-to-r from-gray-900 to-black text-white py-12 mt-16">
         <div className="max-w-7xl mx-auto px-6 text-center">
           <div className="flex items-center justify-center mb-6">
@@ -218,7 +210,6 @@ export default function Home() {
           </p>
         </div>
       </footer>
-      {/* Animations */}
       <style jsx>{`
         @keyframes blob {
           0% {

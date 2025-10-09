@@ -19,7 +19,6 @@ export default function ContactUs() {
   return (
     <div className="min-h-screen bg-white py-16 px-6">
       <div className="max-w-6xl mx-auto">
-        {/* Title */}
         <motion.h1
           initial="hidden"
           animate="visible"
@@ -40,9 +39,7 @@ export default function ContactUs() {
           love to hear from you.
         </motion.p>
 
-        {/* 2 Column Layout */}
         <div className="grid md:grid-cols-2 gap-10 items-start">
-          {/* Left: Google Map */}
           <motion.div
             initial="hidden"
             animate="visible"
@@ -60,7 +57,6 @@ export default function ContactUs() {
             ></iframe>
           </motion.div>
 
-          {/* Right: Contact Form */}
           <motion.form
             initial="hidden"
             animate="visible"
@@ -110,7 +106,6 @@ export default function ContactUs() {
           </motion.form>
         </div>
 
-        {/* Footer Section: Get in Touch */}
         <motion.div
           initial="hidden"
           animate="visible"
@@ -123,7 +118,6 @@ export default function ContactUs() {
           </h2>
 
           <div className="grid md:grid-cols-3 gap-10 text-gray-700 text-center justify-items-center">
-            {/* Column 1: Contact Info */}
             <div className="space-y-3">
               <p className="font-medium text-lg text-gray-800">Contact Info</p>
               <p>Email: info@taungoo.com</p>
@@ -131,7 +125,6 @@ export default function ContactUs() {
               <p>Facebook: facebook.com/taungoo</p>
             </div>
 
-            {/* Column 2: Office Info */}
             <div className="space-y-3">
               <p className="font-medium text-lg text-gray-800">Office</p>
               <p>Location: Taungoo, Myanmar</p>
@@ -139,7 +132,6 @@ export default function ContactUs() {
               <p>Closed: Sat & Sun</p>
             </div>
 
-            {/* Column 3: Quick Links */}
             <div className="space-y-3">
               <p className="font-medium text-lg text-gray-800">Quick Links</p>
               <p>About Us</p>

@@ -12,7 +12,6 @@ import { ToastContainer } from "react-toastify";
 import About from "./components/About";
 import ContactUs from "./components/ContactUs";
 
-// Debug component to track routing
 function RouteDebugger() {
   const location = useLocation();
 

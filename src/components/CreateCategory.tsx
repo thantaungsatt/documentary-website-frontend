@@ -67,16 +67,13 @@ export default function CategoryPage() {
       setSuccess(null);
 
       if (editingCategory && editingCategory.id) {
-        // Update existing category - send formData directly
         await updateCategoryApi(editingCategory.id, formData);
         setSuccess("Category updated successfully!");
       } else {
-        // Create new category
         await createCategoriesApi(formData);
         setSuccess("Category created successfully!");
       }
 
-      // Reset form and refresh categories
       setFormData({ categoryName: "", description: "" });
       setEditingCategory(null);
       await fetchCategories();
@@ -128,7 +125,6 @@ export default function CategoryPage() {
             : "Add a new category to organize your posts"}
         </p>
 
-        {/* Success/Error Messages */}
         {success && (
           <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
             <div className="text-green-600 text-sm">{success}</div>
@@ -142,7 +138,6 @@ export default function CategoryPage() {
         )}
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Left Column - Form */}
           <div className="bg-white rounded-2xl shadow-lg p-6 border border-gray-100">
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
@@ -202,7 +197,6 @@ export default function CategoryPage() {
             </form>
           </div>
 
-          {/* Right Column - Categories List */}
           <div className="bg-white rounded-2xl shadow-lg p-6 border border-gray-100">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-xl font-semibold text-gray-900">

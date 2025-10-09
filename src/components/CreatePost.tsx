@@ -25,14 +25,12 @@ export default function CreatePost() {
     { id: number; categoryName: string }[]
   >([]);
 
-  //  Load username and token
   useEffect(() => {
     const savedUsername = localStorage.getItem("username");
     const token = localStorage.getItem("token");
 
     if (savedUsername) setUsername(savedUsername);
 
-    // Check if user is authenticated
     if (!token) {
       toast.error("Please login first");
       navigate("/login");
@@ -40,7 +38,6 @@ export default function CreatePost() {
     }
   }, [navigate]);
 
-  //  Fetch categories
   useEffect(() => {
     getCategoriesApi()
       .then((res) => setCategories(res))
@@ -50,7 +47,6 @@ export default function CreatePost() {
       });
   }, []);
 
-  //  If editing, load post details
   useEffect(() => {
     if (id) {
       getPostByIdApi(Number(id))
@@ -70,11 +66,9 @@ export default function CreatePost() {
     }
   }, [id]);
 
-  //  Handle image preview
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      // Validate file size (e.g., 5MB max)
       if (file.size > 5 * 1024 * 1024) {
         toast.error("Image size should be less than 5MB");
         return;
@@ -84,7 +78,6 @@ export default function CreatePost() {
     }
   };
 
-  //  Handle create or update
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -93,7 +86,6 @@ export default function CreatePost() {
       return;
     }
 
-    // Check authentication
     const token = localStorage.getItem("token");
     if (!token) {
       toast.error("Please login first");
@@ -112,7 +104,6 @@ export default function CreatePost() {
       formData.append("image", image);
     }
 
-    // For debugging - log FormData contents
     for (let [key, value] of formData.entries()) {
       console.log(`${key}:`, value);
     }
@@ -129,7 +120,6 @@ export default function CreatePost() {
         toast.success(response || "Post created successfully!");
       }
 
-      // Redirect after short delay
       setTimeout(() => {
         navigate("/posts");
       }, 1000);
@@ -149,7 +139,6 @@ export default function CreatePost() {
         </h1>
 
         <form onSubmit={handleSubmit} className="space-y-4">
-          {/* Title */}
           <div>
             <label className="block text-gray-700 mb-2">Title *</label>
             <input
@@ -162,7 +151,6 @@ export default function CreatePost() {
             />
           </div>
 
-          {/* Content */}
           <div>
             <label className="block text-gray-700 mb-2">Content *</label>
             <textarea
@@ -174,7 +162,6 @@ export default function CreatePost() {
             />
           </div>
 
-          {/* Category dropdown */}
           <div>
             <label className="block text-gray-700 mb-2">Category *</label>
             <select
@@ -192,7 +179,6 @@ export default function CreatePost() {
             </select>
           </div>
 
-          {/* Featured checkbox */}
           <div className="flex items-center gap-2">
             <input
               id="featured"
@@ -206,7 +192,6 @@ export default function CreatePost() {
             </label>
           </div>
 
-          {/* Image upload */}
           <div>
             <label className="block text-gray-700 mb-2">
               {id ? "Change image (optional)" : "Upload image (optional)"}
@@ -228,7 +213,6 @@ export default function CreatePost() {
             )}
           </div>
 
-          {/* Submit */}
           <button
             type="submit"
             disabled={loading}

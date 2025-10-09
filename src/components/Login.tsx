@@ -18,9 +18,8 @@ export default function Login() {
     try {
       const response = await loginApi({ username, password });
       toast.success(response.message);
-      setToken(btoa(`${username}:${password}`)); // save encoded Basic token
+      setToken(btoa(`${username}:${password}`)); 
 
-      // Redirect to home page after short delay
       setTimeout(() => {
         navigate("/");
       }, 800);
@@ -35,7 +34,6 @@ export default function Login() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-6">
-      {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
         <div className="absolute top-1/3 right-1/4 w-32 h-32 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
@@ -43,7 +41,6 @@ export default function Login() {
       </div>
 
       <div className="relative z-10 w-full max-w-md">
-        {/* Logo/Brand */}
         <div className="text-center mb-5 mt-10">
           {/* <div className="flex items-center justify-center mb-4">
             <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
@@ -83,7 +80,6 @@ export default function Login() {
           )}
 
           <div className="space-y-6">
-            {/* Username Field */}
             <div>
               <label
                 htmlFor="username"
@@ -120,7 +116,6 @@ export default function Login() {
               </div>
             </div>
 
-            {/* Password Field */}
             <div>
               <label
                 htmlFor="password"
@@ -157,7 +152,6 @@ export default function Login() {
               </div>
             </div>
 
-            {/* Login Button */}
             <button
               type="submit"
               disabled={loading}
@@ -207,7 +201,6 @@ export default function Login() {
             </button>
           </div>
 
-          {/* Additional Links */}
           <div className="mt-6 text-center">
             <p className="text-gray-600 text-sm">
               Don't have an account?{" "}
@@ -221,7 +214,6 @@ export default function Login() {
           </div>
         </form>
 
-        {/* Footer Note */}
         <div className="text-center mt-8">
           <p className="text-gray-500 text-sm">
             Secure login with encrypted credentials

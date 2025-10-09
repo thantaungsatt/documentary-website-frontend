@@ -5,13 +5,7 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { getPostByIdApi, deletePostApi } from "../service/TaungooService";
 import type { PostDto } from "../dto/PostDto";
 import { toast } from "react-toastify";
-import {
-  CgMore,
-  CgMoreAlt,
-  CgMoreVerticalAlt,
-  CgMoreVerticalO,
-  CgMoreVerticalR,
-} from "react-icons/cg";
+import { CgMoreVerticalAlt } from "react-icons/cg";
 import { PiPencil } from "react-icons/pi";
 import { BiTrash } from "react-icons/bi";
 
@@ -26,7 +20,6 @@ export default function PostDetails() {
   const token = localStorage.getItem("token");
   const loggedIn = !!token;
 
-  // Fetch post details
   useEffect(() => {
     if (!id) return;
 
@@ -36,7 +29,6 @@ export default function PostDetails() {
       .finally(() => setLoading(false));
   }, [id]);
 
-  // Delete post
   const handleDelete = async () => {
     if (!post) return;
     if (!window.confirm("Are you sure you want to delete this post?")) return;
@@ -70,7 +62,6 @@ export default function PostDetails() {
   return (
     <div className="pt-16 min-h-screen bg-gray-50 relative">
       <div className="max-w-4xl mx-auto px-4 py-8 bg-white rounded-2xl shadow-md relative">
-        {/* More Options (only logged in users) */}
         {loggedIn && (
           <div className="absolute top-4 right-4">
             <button
@@ -99,17 +90,14 @@ export default function PostDetails() {
           </div>
         )}
 
-        {/* Featured Badge */}
         {post.featured && (
           <span className="inline-block bg-yellow-400 text-white px-3 py-1 rounded-full font-semibold mb-4">
             Featured
           </span>
         )}
 
-        {/* Title */}
         <h1 className="text-3xl font-bold mb-4">{post.title}</h1>
 
-        {/* Meta */}
         <div className="flex items-center justify-between mb-6 text-gray-500 text-sm">
           <span>By {post.username}</span>
           <span>{new Date(post.createdAt).toLocaleDateString()}</span>
@@ -118,7 +106,6 @@ export default function PostDetails() {
           </span>
         </div>
 
-        {/* Image */}
         {post.imageBase64 && (
           <img
             src={`data:image/jpeg;base64,${post.imageBase64}`}
@@ -127,12 +114,10 @@ export default function PostDetails() {
           />
         )}
 
-        {/* Content */}
         <p className="text-gray-700 leading-relaxed whitespace-pre-line">
           {post.content}
         </p>
 
-        {/* Back Button */}
         <div className="mt-6">
           <Link
             to="/posts"

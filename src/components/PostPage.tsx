@@ -51,7 +51,6 @@ export default function PostPage() {
   return (
     <div className="pt-16 min-h-screen bg-gray-50">
       {" "}
-      {/* Account for fixed navbar */}
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-3xl font-bold text-gray-900 mb-8">All Posts</h1>
 
@@ -66,7 +65,6 @@ export default function PostPage() {
                 key={post.postId}
                 className="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 overflow-hidden border border-gray-100 hover:border-transparent hover:ring-2 hover:ring-blue-400/50 flex flex-col h-full"
               >
-                {/* Image */}
                 <div className="relative h-52 overflow-hidden">
                   {post.imageBase64 ? (
                     <img
@@ -84,7 +82,6 @@ export default function PostPage() {
                   <div className="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition duration-300"></div>
                 </div>
 
-                {/* Content */}
                 <div className="p-6 flex flex-col flex-grow">
                   <div className="flex items-center justify-between mb-3">
                     <span className="bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-1 rounded-full">

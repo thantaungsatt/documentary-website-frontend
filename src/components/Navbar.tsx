@@ -110,7 +110,6 @@ export default function Navbar() {
     <nav className="bg-white/80 backdrop-blur-md border-b border-gray-200/50 fixed top-0 w-full z-50 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
-          {/* Logo */}
           <Link
             to="/"
             className="flex items-center space-x-3 group flex-shrink-0"
@@ -120,7 +119,6 @@ export default function Navbar() {
             </span>
           </Link>
 
-          {/* Navigation Links - Center */}
           <div className="hidden md:flex items-center space-x-8">
             <Link
               to="/"
@@ -138,7 +136,6 @@ export default function Navbar() {
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
             </Link>
 
-            {/* Categories Dropdown */}
             <div className="relative">
               <button
                 onClick={handleCategoryClick}
@@ -210,11 +207,9 @@ export default function Navbar() {
             </Link>
           </div>
 
-          {/* Auth Section */}
           <div className="flex items-center space-x-4 user-dropdown">
             {loggedIn ? (
               <div className="flex items-center space-x-4">
-                {/* Create Post Button */}
                 <Link
                   to="/create-post"
                   className="hidden sm:flex items-center space-x-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-2 rounded-xl font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300"
@@ -223,7 +218,6 @@ export default function Navbar() {
                   <span>Create Post</span>
                 </Link>
 
-                {/* User Dropdown */}
                 <div className="relative">
                   <button
                     onClick={handleUserDropdownClick}
@@ -240,7 +234,6 @@ export default function Navbar() {
                     /> */}
                   </button>
 
-                  {/* User Dropdown Menu */}
                   {isUserDropdownOpen && (
                     <div className="absolute right-0 mt-2 w-56 bg-white/90 backdrop-blur-md border border-gray-200/50 rounded-xl shadow-xl z-50 py-2">
                       <div className="px-4 py-3 border-b border-gray-200/50">

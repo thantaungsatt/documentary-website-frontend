@@ -34,13 +34,13 @@ export const updateCategoryApi = async (
 
 export const getPostByIdApi = async (id: number) => {
   const response = await axios.get(`${BACKEND_URL}/list/posts/${id}`);
-  return response.data; // response.data.imageBase64 is now a string
+  return response.data;
 };
 
 export const createPostApi = async (
   postFormData: FormData
 ): Promise<string> => {
-  const token = localStorage.getItem("token"); // or your auth token storage
+  const token = localStorage.getItem("token");
 
   const response = await axios.post(
     `${BACKEND_URL}/create-post`,
@@ -48,7 +48,7 @@ export const createPostApi = async (
     {
       headers: {
         "Content-Type": "multipart/form-data",
-        Authorization: `Bearer ${token}`, // Add if using JWT
+        Authorization: `Bearer ${token}`,
       },
     }
   );
@@ -64,7 +64,7 @@ export const updatePostApi = async (
   const response = await axios.put(`${BACKEND_URL}/update-post/${id}`, data, {
     headers: {
       "Content-Type": "multipart/form-data",
-      Authorization: `Bearer ${token}`, // Add if using JWT
+      Authorization: `Bearer ${token}`,
     },
   });
   return response.data;
